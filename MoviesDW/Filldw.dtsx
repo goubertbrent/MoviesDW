@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{B4C22775-A7D2-41B9-83F7-D300D7A9A03A}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{13695EA8-05A5-4B81-B40F-535DD82A3666}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -85,6 +85,23 @@
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Drop Constraints"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BB9CFEE5-7557-4C89-AEF0-10CB9C84B4E0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Drop Constraints"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60BEC4F2-FC70-4CF6-AA10-EF764C00B0AE}"
+          SQLTask:SqlStatementSource="ALTER TABLE FactBooking NOCHECK CONSTRAINT ALL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Fill Table DimCustomer(SCD)"
       DTS:CreationName="Microsoft.Pipeline"
@@ -1271,10 +1288,6 @@
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Fill Table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TimeKey]"
-                      dataType="i4"
-                      name="TimeKey" />
-                    <externalMetadataColumn
                       refId="Package\Fill Table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BookingDateYear]"
                       dataType="i4"
                       name="BookingDateYear" />
@@ -1296,6 +1309,10 @@
                       refId="Package\Fill Table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateWeekNumber]"
                       dataType="i4"
                       name="DateWeekNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Fill Table DimDate\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1411,15 +1428,6 @@
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[movieID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
-                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[movieID]"
-                      name="movieID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[GenreID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -1438,13 +1446,18 @@
                       lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[genreDescription]"
                       name="genreDescription"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[MovieID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].ExternalColumns[MovieID]"
+                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[MovieID]"
+                      name="MovieID"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
-                      dataType="i4"
-                      name="movieID" />
                     <externalMetadataColumn
                       refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].ExternalColumns[GenreID]"
                       dataType="i4"
@@ -1454,6 +1467,10 @@
                       dataType="wstr"
                       length="25"
                       name="genreDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].ExternalColumns[MovieID]"
+                      dataType="i4"
+                      name="MovieID" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1462,10 +1479,10 @@
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Error Output].Columns[movieID]"
+                      refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Error Output].Columns[MovieID]"
                       dataType="i4"
-                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Error Output].Columns[movieID]"
-                      name="movieID" />
+                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Error Output].Columns[MovieID]"
+                      name="MovieID" />
                     <outputColumn
                       refId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Error Output].Columns[GenreID]"
                       dataType="i4"
@@ -1567,11 +1584,11 @@
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Fill Table DimMovie\Fill DimMovie.Inputs[OLE DB Destination Input].Columns[movieID]"
+                      refId="Package\Fill Table DimMovie\Fill DimMovie.Inputs[OLE DB Destination Input].Columns[MovieID]"
                       cachedDataType="i4"
-                      cachedName="movieID"
+                      cachedName="MovieID"
                       externalMetadataColumnId="Package\Fill Table DimMovie\Fill DimMovie.Inputs[OLE DB Destination Input].ExternalColumns[MovieID]"
-                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[movieID]" />
+                      lineageId="Package\Fill Table DimMovie\Extract DimMovie.Outputs[OLE DB Source Output].Columns[MovieID]" />
                     <inputColumn
                       refId="Package\Fill Table DimMovie\Fill DimMovie.Inputs[OLE DB Destination Input].Columns[GenreID]"
                       cachedDataType="i4"
@@ -1949,6 +1966,40 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Fill Table FactBookings"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B31236A0-3D9F-4E14-B5FA-F987C3DFCABF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fill Table FactBookings"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60BEC4F2-FC70-4CF6-AA10-EF764C00B0AE}"
+          SQLTask:SqlStatementSource="INSERT INTO FactBooking&#xA;           (BookingID&#xA;&#x9;&#x9;   ,customerKey&#xA;           ,movieKey&#xA;           ,DateKey&#xA;           ,BookedSeats&#xA;           ,Price&#xA;           ,totalPrice&#xA;&#x9;&#x9;   ,MovieShowingKey)&#xA;SELECT &#xA;b.bookingID&#xA;, dc.customerKey&#xA;,ms.movieID&#xA;,CAST(FORMAT(b.bookingDate,'yyyyMMdd') AS INT)&#xA;,count(bs.bookedSeatID)&#xA;,ms.price&#xA;,ms.price*count(bs.bookedSeatID)&#xA;,dms.movieShowingID&#xA;FROM Movies.dbo.Booking b &#xA;join Movies.dbo.BookedSeat bs on bs.bookingID = b.bookingID&#xA;join Movies.dbo.Customer c on b.customerID = c.customerID&#xA;join Movies.dbo.MovieShowing ms on b.movieShowingID = ms.movieShowingID&#xA;join dbo.DimCustomer dc on dc.customerId = c.customerID&#xA;join dbo.DimMovieshowing dms on dms.MovieShowingID = b.movieShowingID&#xA;join dbo.FactBooking fb on fb.BookingID = b.bookingID&#xA;WHERE &#xA;b.bookingDate &lt;= dc.[StartDate] AND (dc.[EndDate] IS NULL OR b.bookingDate &lt;= dc.[EndDate])  &#xA;group by &#xA;b.bookingID&#xA;,dc.customerKey&#xA;,ms.movieid&#xA;,CAST(FORMAT(b.bookingDate,'yyyyMMdd') AS INT)&#xA;,ms.price&#xA;,dms.movieShowingID&#xA;having b.bookingID &gt;= (SELECT MAX(fb.BookingID))" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Replace Constraints"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{cb7031c5-5307-489b-80c1-928932107713}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Replace Constraints"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60BEC4F2-FC70-4CF6-AA10-EF764C00B0AE}"
+          SQLTask:SqlStatementSource="ALTER TABLE FactBooking WITH CHECK CHECK CONSTRAINT ALL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Truncate Table DimDate"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -2049,6 +2100,30 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\Fill Table DimCustomer(SCD)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{8200FDDA-26E0-45B5-9EBC-8D6F319B5D7E}"
+      DTS:From="Package\Fill Table DimCustomer(SCD)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Fill Table FactBookings" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{6D00AC6D-343F-4021-A7A4-15EEF02AF0AF}"
+      DTS:From="Package\Fill Table FactBookings"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Replace Constraints" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{629EAF7F-D98C-4B0D-BE2E-33C5CDC5E16A}"
+      DTS:From="Package\Drop Constraints"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Truncate Table DimMovieShowing" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2061,11 +2136,43 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Drop Constraints"
+          TopLeft="425,75" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Fill Table DimCustomer(SCD)"
+          TopLeft="413,614" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Fill Table DimDate"
+          TopLeft="457,534" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Fill Table DimMovie"
+          TopLeft="450,380" />
         <NodeLayout
           Size="218,42"
           Id="Package\Fill Table DimMovieShowing"
           TopLeft="427,214" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Fill Table FactBookings"
+          TopLeft="431,698" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Replace Constraints"
+          TopLeft="437,767" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Truncate Table DimDate"
+          TopLeft="453,458" />
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Truncate Table DimMovie"
+          TopLeft="432,297" />
         <NodeLayout
           Size="247,42"
           Id="Package\Truncate Table DimMovieShowing"
@@ -2092,10 +2199,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="205,42"
-          Id="Package\Truncate Table DimMovie"
-          TopLeft="432,297" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="535.25,256">
@@ -2118,10 +2221,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="176,42"
-          Id="Package\Fill Table DimMovie"
-          TopLeft="450,380" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="536.25,339">
@@ -2144,14 +2243,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Truncate Table DimDate"
-          TopLeft="453,458" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Fill Table DimDate"
-          TopLeft="457,534" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="538,422">
@@ -2196,36 +2287,110 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="225,42"
-          Id="Package\Fill Table DimCustomer(SCD)"
-          TopLeft="456,610" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="542,576">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="26.5,34"
+              EndConnector="-16.5,38"
               Start="0,0"
-              End="26.5,26.5">
+              End="-16.5,30.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13" />
+                    End="0,15" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13"
-                    Point2="0,17"
-                    Point3="4,17" />
+                    Point1="0,15"
+                    Point2="0,19"
+                    Point3="-4,19" />
                   <mssgle:LineSegment
-                    End="22.5,17" />
+                    End="-12.5,19" />
                   <mssgle:CubicBezierSegment
-                    Point1="22.5,17"
-                    Point2="26.5,17"
-                    Point3="26.5,21" />
+                    Point1="-12.5,19"
+                    Point2="-16.5,19"
+                    Point3="-16.5,23" />
                   <mssgle:LineSegment
-                    End="26.5,26.5" />
+                    End="-16.5,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="526.5,656">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="526.75,740">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="510,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.5,31"
+              Start="0,0"
+              End="20.5,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.5"
+                    Point2="0,15.5"
+                    Point3="4,15.5" />
+                  <mssgle:LineSegment
+                    End="16.5,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.5,15.5"
+                    Point2="20.5,15.5"
+                    Point3="20.5,19.5" />
+                  <mssgle:LineSegment
+                    End="20.5,23.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2238,122 +2403,259 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Fill Table DimMovieShowing">
+    design-time-name="Package\Fill Table DimCustomer(SCD)">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="188,42"
-          Id="Package\Fill Table DimMovieShowing\Extract MovieShowing"
-          TopLeft="296,287" />
-        <NodeLayout
-          Size="187,42"
-          Id="Package\Fill Table DimMovieShowing\Fill DimMovieShowing"
-          TopLeft="298,385" />
-        <EdgeLayout
-          Id="Package\Fill Table DimMovieShowing.Paths[OLE DB Source Output]"
-          TopLeft="390.75,329">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56"
-              Start="0,0"
-              End="0,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimMovieShowing\Extract MovieShowing">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">View</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimMovieShowing\Fill DimMovieShowing">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Fill Table DimMovie">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="165,42"
-          Id="Package\Fill Table DimMovie\Extract DimMovie"
-          TopLeft="261,172" />
+          Id="Package\Fill Table DimCustomer(SCD)\Insert Destination"
+          TopLeft="157.5,617.5" />
         <NodeLayout
-          Size="145,42"
-          Id="Package\Fill Table DimMovie\Fill DimMovie"
-          TopLeft="270,275" />
+          Size="173,42"
+          Id="Package\Fill Table DimCustomer(SCD)\OLE DB Command"
+          TopLeft="5.50000000000003,311.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Fill Table DimCustomer(SCD)\Derived Column 1"
+          TopLeft="156.5,515.5" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Fill Table DimCustomer(SCD)\Fill DimCustomer(SCD)"
+          TopLeft="143,107.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Fill Table DimCustomer(SCD)\Union All"
+          TopLeft="178.5,413.5" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Fill Table DimCustomer(SCD)\Extract Customer"
+          TopLeft="158,5.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Fill Table DimCustomer(SCD)\Derived Column"
+          TopLeft="21,209.5" />
         <EdgeLayout
-          Id="Package\Fill Table DimMovie.Paths[OLE DB Source Output]"
-          TopLeft="343,214">
+          Id="Package\Fill Table DimCustomer(SCD).Paths[Union All Output 1]"
+          TopLeft="240,455.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,53.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[OLE DB Source Output]"
+          TopLeft="240,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[OLE DB Command Output]"
+          TopLeft="92,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="128.833333333333,60"
+              Start="0,0"
+              End="128.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.53772070626"
+                    Point2="0,35.53772070626"
+                    Point3="4,35.53772070626" />
+                  <mssgle:LineSegment
+                    End="124.833333333333,35.53772070626" />
+                  <mssgle:CubicBezierSegment
+                    Point1="124.833333333333,35.53772070626"
+                    Point2="128.833333333333,35.53772070626"
+                    Point3="128.833333333333,39.53772070626" />
+                  <mssgle:LineSegment
+                    End="128.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[New Output]"
+          TopLeft="271,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.8333333333333,264"
+              Start="0,0"
+              End="-11.8333333333333,256.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,127.234813847159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,127.234813847159"
+                    Point2="0,131.234813847159"
+                    Point3="-4,131.234813847159" />
+                  <mssgle:LineSegment
+                    End="-7.83333333333326,131.234813847159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.83333333333326,131.234813847159"
+                    Point2="-11.8333333333333,131.234813847159"
+                    Point3="-11.8333333333333,135.234813847159" />
+                  <mssgle:LineSegment
+                    End="-11.8333333333333,256.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-33.0080533854166,136.234813847159,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[Historical Attribute Inserts Output]"
+          TopLeft="209,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-109,60"
+              Start="0,0"
+              End="-109,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2944785276074" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2944785276074"
+                    Point2="0,24.2944785276074"
+                    Point3="-4,24.2944785276074" />
+                  <mssgle:LineSegment
+                    End="-105,24.2944785276074" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-105,24.2944785276074"
+                    Point2="-109,24.2944785276074"
+                    Point3="-109,28.2944785276074" />
+                  <mssgle:LineSegment
+                    End="-109,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-129.55638671875,29.2944785276074,150.1127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[Derived Column Output1]"
+          TopLeft="240,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Table DimCustomer(SCD).Paths[Derived Column Output]"
+          TopLeft="100,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,60"
+              Start="0,0"
+              End="-8,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-4,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,30"
+                    Point2="-8,30"
+                    Point3="-8,34" />
+                  <mssgle:LineSegment
+                    End="-8,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimMovie\Extract DimMovie">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">View</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimMovie\Fill DimMovie">
+    design-time-name="Package\Fill Table DimCustomer(SCD)\Insert Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2362,6 +2664,65 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Table DimCustomer(SCD)\Fill DimCustomer(SCD)">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{60BEC4F2-FC70-4CF6-AA10-EF764C00B0AE}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[DimCustomer]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Extract Customer.Outputs[OLE DB Source Output].Columns[country]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Country&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Extract Customer.Outputs[OLE DB Source Output].Columns[cutomerID]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;CustomerID&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Union All&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Derived Column 1&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn&gt;StartDate&lt;/StartDateColumn&gt;
+  &lt;EndDateColumn&gt;EndDate&lt;/EndDateColumn&gt;
+  &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
+  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Table DimCustomer(SCD)\Extract Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2371,13 +2732,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="156,42"
-          Id="Package\Fill Table DimDate\Flat File Source"
-          TopLeft="230,259" />
-        <NodeLayout
           Size="177,42"
           Id="Package\Fill Table DimDate\OLE DB Destination"
           TopLeft="235,353" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Fill Table DimDate\Flat File Source"
+          TopLeft="230,259" />
         <EdgeLayout
           Id="Package\Fill Table DimDate.Paths[Flat File Source Output]"
           TopLeft="308,301">
@@ -2429,236 +2790,32 @@
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Fill Table DimCustomer(SCD)">
+    design-time-name="Package\Fill Table DimMovie">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="164,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Extract Customer"
-          TopLeft="158,5.5" />
-        <NodeLayout
-          Size="194,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Fill DimCustomer(SCD)"
-          TopLeft="143,107.5" />
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[OLE DB Source Output]"
-          TopLeft="240,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Derived Column"
-          TopLeft="21,209.5" />
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[Historical Attribute Inserts Output]"
-          TopLeft="209,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-109,60"
-              Start="0,0"
-              End="-109,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.2944785276074" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.2944785276074"
-                    Point2="0,24.2944785276074"
-                    Point3="-4,24.2944785276074" />
-                  <mssgle:LineSegment
-                    End="-105,24.2944785276074" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-105,24.2944785276074"
-                    Point2="-109,24.2944785276074"
-                    Point3="-109,28.2944785276074" />
-                  <mssgle:LineSegment
-                    End="-109,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-129.55638671875,29.2944785276074,150.1127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Fill Table DimCustomer(SCD)\OLE DB Command"
-          TopLeft="5.50000000000003,311.5" />
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[Derived Column Output]"
-          TopLeft="100,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-8,60"
-              Start="0,0"
-              End="-8,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="-4,30" />
-                  <mssgle:LineSegment
-                    End="-4,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4,30"
-                    Point2="-8,30"
-                    Point3="-8,34" />
-                  <mssgle:LineSegment
-                    End="-8,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="123,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Union All"
-          TopLeft="178.5,413.5" />
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[New Output]"
-          TopLeft="271,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-11.8333333333333,264"
-              Start="0,0"
-              End="-11.8333333333333,256.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,127.234813847159" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,127.234813847159"
-                    Point2="0,131.234813847159"
-                    Point3="-4,131.234813847159" />
-                  <mssgle:LineSegment
-                    End="-7.83333333333326,131.234813847159" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.83333333333326,131.234813847159"
-                    Point2="-11.8333333333333,131.234813847159"
-                    Point3="-11.8333333333333,135.234813847159" />
-                  <mssgle:LineSegment
-                    End="-11.8333333333333,256.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-33.0080533854166,136.234813847159,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[OLE DB Command Output]"
-          TopLeft="92,353.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="128.833333333333,60"
-              Start="0,0"
-              End="128.833333333333,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.53772070626" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.53772070626"
-                    Point2="0,35.53772070626"
-                    Point3="4,35.53772070626" />
-                  <mssgle:LineSegment
-                    End="124.833333333333,35.53772070626" />
-                  <mssgle:CubicBezierSegment
-                    Point1="124.833333333333,35.53772070626"
-                    Point2="128.833333333333,35.53772070626"
-                    Point3="128.833333333333,39.53772070626" />
-                  <mssgle:LineSegment
-                    End="128.833333333333,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="167,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Derived Column 1"
-          TopLeft="156.5,515.5" />
-        <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[Union All Output 1]"
-          TopLeft="240,455.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="145,42"
+          Id="Package\Fill Table DimMovie\Fill DimMovie"
+          TopLeft="270,275" />
         <NodeLayout
           Size="165,42"
-          Id="Package\Fill Table DimCustomer(SCD)\Insert Destination"
-          TopLeft="157.5,617.5" />
+          Id="Package\Fill Table DimMovie\Extract DimMovie"
+          TopLeft="261,171" />
         <EdgeLayout
-          Id="Package\Fill Table DimCustomer(SCD).Paths[Derived Column Output1]"
-          TopLeft="240,557.5">
+          Id="Package\Fill Table DimMovie.Paths[OLE DB Source Output]"
+          TopLeft="343,213">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,62"
               Start="0,0"
-              End="0,52.5">
+              End="0,54.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,54.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2671,7 +2828,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimCustomer(SCD)\Extract Customer">
+    design-time-name="Package\Fill Table DimMovie\Extract DimMovie">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2684,53 +2841,73 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimCustomer(SCD)\Fill DimCustomer(SCD)">
+    design-time-name="Package\Fill Table DimMovie\Fill DimMovie">
     <Properties>
       <Property>
-        <Name>SCDMetadata</Name>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionID&gt;{60BEC4F2-FC70-4CF6-AA10-EF764C00B0AE}&lt;/ConnectionID&gt;
-  &lt;TableName&gt;[dbo].[DimCustomer]&lt;/TableName&gt;
-  &lt;InputToColumnsCollection&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Extract Customer.Outputs[OLE DB Source Output].Columns[country]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Country&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Extract Customer.Outputs[OLE DB Source Output].Columns[cutomerID]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;CustomerID&lt;/ColumnName&gt;
-      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
-      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-  &lt;/InputToColumnsCollection&gt;
-  &lt;GeneratedComponentsIdentificationStrings&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Derived Column&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Union All&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Derived Column 1&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
-  &lt;/GeneratedComponentsIdentificationStrings&gt;
-  &lt;FailFixedAttribute&gt;true&lt;/FailFixedAttribute&gt;
-  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
-  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
-  &lt;CurrentIndicatorColumn /&gt;
-  &lt;InferredIndicatorColumn /&gt;
-  &lt;ValueCurrent /&gt;
-  &lt;ValueExpired /&gt;
-  &lt;StartDateColumn&gt;StartDate&lt;/StartDateColumn&gt;
-  &lt;EndDateColumn&gt;EndDate&lt;/EndDateColumn&gt;
-  &lt;DateVariable&gt;System::StartTime&lt;/DateVariable&gt;
-  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
-&lt;/SCDWizardMetadata&gt;</Value>
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Fill Table DimMovieShowing">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Fill Table DimMovieShowing\Fill DimMovieShowing"
+          TopLeft="298,385" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Fill Table DimMovieShowing\Extract MovieShowing"
+          TopLeft="296,287" />
+        <EdgeLayout
+          Id="Package\Fill Table DimMovieShowing.Paths[OLE DB Source Output]"
+          TopLeft="390.75,329">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Table DimMovieShowing\Extract MovieShowing">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Fill Table DimCustomer(SCD)\Insert Destination">
+    design-time-name="Package\Fill Table DimMovieShowing\Fill DimMovieShowing">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
